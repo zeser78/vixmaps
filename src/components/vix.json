@@ -1,0 +1,142 @@
+[
+  {
+    "Symbol": "VX13J20",
+    "Expiration": "04/01/2020",
+    "Last": 53.95,
+    "Change": -6.65,
+    "High": 54.3,
+    "Low": 51.3,
+    "Settlement": 52.675,
+    "Volume": 11
+  },
+  {
+    "Symbol": "VX14J20",
+    "Expiration": "04/08/2020",
+    "Last": 47.5,
+    "Change": 0,
+    "High": 49,
+    "Low": 48.2,
+    "Settlement": 47.725,
+    "Volume": 0
+  },
+  {
+    "Symbol": "VXJ20",
+    "Expiration": "04/15/2020",
+    "Last": 47.25,
+    "Change": -2.4,
+    "High": 51.3,
+    "Low": 45.9,
+    "Settlement": 46.775,
+    "Volume": 55428
+  },
+  {
+    "Symbol": "VX16J20",
+    "Expiration": "04/22/2020",
+    "Last": 48.5,
+    "Change": 1.4,
+    "High": 48.5,
+    "Low": 46.4,
+    "Settlement": 45.675,
+    "Volume": 2
+  },
+  {
+    "Symbol": "VX17J20",
+    "Expiration": "04/29/2020",
+    "Last": 0,
+    "Change": 0,
+    "High": 44.9,
+    "Low": 44.35,
+    "Settlement": 43.725,
+    "Volume": 0
+  },
+  {
+    "Symbol": "VX18K20",
+    "Expiration": "05/06/2020",
+    "Last": 0,
+    "Change": 0,
+    "High": 43.75,
+    "Low": 42.35,
+    "Settlement": 42.2,
+    "Volume": 0
+  },
+  {
+    "Symbol": "VXK20",
+    "Expiration": "05/20/2020",
+    "Last": 41.2,
+    "Change": -1.34,
+    "High": 44.05,
+    "Low": 40.17,
+    "Settlement": 40.925,
+    "Volume": 38898
+  },
+  {
+    "Symbol": "VXM20",
+    "Expiration": "06/17/2020",
+    "Last": 37.4,
+    "Change": -0.75,
+    "High": 39,
+    "Low": 36.05,
+    "Settlement": 37.225,
+    "Volume": 15090
+  },
+  {
+    "Symbol": "VXN20",
+    "Expiration": "07/22/2020",
+    "Last": 33.95,
+    "Change": -0.35,
+    "High": 34.85,
+    "Low": 33.04,
+    "Settlement": 33.925,
+    "Volume": 6803
+  },
+  {
+    "Symbol": "VXQ20",
+    "Expiration": "08/19/2020",
+    "Last": 31.65,
+    "Change": 0.2,
+    "High": 31.8,
+    "Low": 30.6,
+    "Settlement": 31.675,
+    "Volume": 3352
+  },
+  {
+    "Symbol": "VXU20",
+    "Expiration": "09/16/2020",
+    "Last": 30.1,
+    "Change": 0.2,
+    "High": 30.2,
+    "Low": 29.15,
+    "Settlement": 30.1,
+    "Volume": 2629
+  },
+  {
+    "Symbol": "VXV20",
+    "Expiration": "10/21/2020",
+    "Last": 29.95,
+    "Change": 0.25,
+    "High": 30.07,
+    "Low": 29.2,
+    "Settlement": 29.925,
+    "Volume": 1324
+  },
+  {
+    "Symbol": "VXX20",
+    "Expiration": "11/18/2020",
+    "Last": 28.7,
+    "Change": 0.1,
+    "High": 28.8,
+    "Low": 28,
+    "Settlement": 28.7,
+    "Volume": 401
+  },
+  {
+    "Symbol": "VXZ20",
+    "Expiration": "12/16/2020",
+    "Last": 29.25,
+    "Change": 0,
+    "High": 25.1,
+    "Low": 35.05,
+    "Settlement": 30.075,
+    "Volume": 0
+  }
+]
