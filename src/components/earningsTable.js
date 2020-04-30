@@ -19,7 +19,8 @@ const EarningsTable = () => {
       axios
         .get(`https://financialmodelingprep.com/api/v3/quote/${stock}`)
         .then(resp => {
-          // console.log(resp.data[0].earningsAnnouncement)
+          console.log(resp)
+
           data = resp.data[0]
           if (data === undefined) {
             setStockList(
@@ -36,7 +37,13 @@ const EarningsTable = () => {
             )
           } else {
             console.log("defined")
-            let dateFormat = new Date(data.earningsAnnouncement).toDateString()
+            let dateFormat
+
+            if (new Date(data.earningsAnnouncement).getFullYear() < 2020) {
+              dateFormat = "n/d"
+            } else {
+              dateFormat = new Date(data.earningsAnnouncement).toDateString()
+            }
             setStockList(prevData => [
               ...prevData,
               {
@@ -50,12 +57,118 @@ const EarningsTable = () => {
         })
     })
   }, [])
+  console.log(stock)
+  const meta = [
+    {
+      key: "symbol",
+      text: "Symbol",
+      sort: true,
+    },
+    {
+      key: "price",
+      text: "Price",
+      sort: true,
+    },
+    {
+      key: "change",
+      text: "Change %",
+      sort: true,
+    },
+    {
+      key: "earning",
+      text: "Earning Day",
+      sort: true,
+    },
+  ]
+
+  function normalizeData(data) {
+    return data.map(td => {
+      const keys = Object.keys(td)
+      return keys.map(key => ({ key, text: td[key] }))
+    })
+  }
+
+  const compare = {
+    ">": (d1, d2) => d1 > d2,
+    "<": (d1, d2) => d1 < d2,
+  }
+
+  function TableData({ data, meta }) {
+    const headerOrder = meta.map(m => m.key)
+    return (
+      <tbody>
+        {data.map(row => (
+          <tr>
+            {row.map((_, i) => (
+              <TableCell data={row.find(r => r.key === headerOrder[i])} />
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    )
+  }
+  function TableHeader({ headers }) {
+    return (
+      <thead>
+        {headers.map(d => (
+          <TableCell data={d} />
+        ))}
+      </thead>
+    )
+  }
+  function TableCell({ data }) {
+    return (
+      <td
+        className={
+          data.text == new Date().toDateString() ? "background-red" : null
+        }
+        onClick={data.sortFunc}
+      >
+        {data.text}
+      </td>
+    )
+  }
+  // meta values comes to useState and xreate a sort when they are click
+  const [headerMeta, setHeaderMeta] = useState(meta)
+  const [tableData, setTableData] = useState([])
+  const [sortBy, setSortBy] = useState({ key: null, order: ">" })
+
+  useEffect(() => {
+    function sortFunc(m) {
+      setSortBy({ key: m.key, order: sortBy.order === ">" ? "<" : ">" })
+    }
+
+    setHeaderMeta(currentHeaderMeta =>
+      currentHeaderMeta.map(m =>
+        m.sort ? { ...m, sortFunc: () => sortFunc(m) } : m
+      )
+    )
+  }, [sortBy])
+
+  useEffect(() => {
+    // normalize data
+    setTableData(normalizeData(stock), meta)
+  }, [])
+
+  useEffect(() => {
+    // sort
+    setTableData(
+      normalizeData(
+        stock.sort((d1, d2) =>
+          compare[sortBy.order](d1[sortBy.key], d2[sortBy.key])
+        )
+      )
+    )
+  }, [sortBy])
 
   return (
     <>
       <h2>Stocks Table</h2>
-
-      <table style={{ width: `80%` }}>
+      <div>
+        <TableHeader headers={headerMeta} />
+        <TableData data={tableData} meta={meta} />
+      </div>
+      {/* <table style={{ width: `80%` }}>
         <tr>
           <td>Item</td>
           <td>Symbol</td>
@@ -78,7 +191,7 @@ const EarningsTable = () => {
             </td>
           </tr>
         ))}
-      </table>
+      </table> */}
     </>
   )
 }
