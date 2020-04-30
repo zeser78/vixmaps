@@ -57,128 +57,39 @@ const EarningsTable = () => {
         })
     })
   }, [])
-  console.log(stock)
-  const meta = [
-    {
-      key: "symbol",
-      text: "Symbol",
-      sort: true,
-    },
-    {
-      key: "price",
-      text: "Price",
-      sort: true,
-    },
-    {
-      key: "change",
-      text: "Change %",
-      sort: true,
-    },
-    {
-      key: "earning",
-      text: "Earning Day",
-      sort: true,
-    },
-  ]
 
-  function normalizeData(data) {
-    return data.map(td => {
-      const keys = Object.keys(td)
-      return keys.map(key => ({ key, text: td[key] }))
+  const [sortedField, setSortedField] = useState(null)
+  let sortedProducts = [...stock]
+  if (sortedField !== null) {
+    sortedProducts.sort((a, b) => {
+      if (a[sortedField] < b[sortedField]) {
+        return -1
+      }
+      if (a[sortedField] > b[sortedField]) {
+        return 1
+      }
+      return 0
     })
   }
-
-  const compare = {
-    ">": (d1, d2) => d1 > d2,
-    "<": (d1, d2) => d1 < d2,
-  }
-
-  function TableData({ data, meta }) {
-    const headerOrder = meta.map(m => m.key)
-    return (
-      <tbody>
-        {data.map(row => (
-          <tr>
-            {row.map((_, i) => (
-              <TableCell data={row.find(r => r.key === headerOrder[i])} />
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    )
-  }
-  function TableHeader({ headers }) {
-    return (
-      <thead>
-        {headers.map(d => (
-          <TableCell data={d} />
-        ))}
-      </thead>
-    )
-  }
-  function TableCell({ data }) {
-    return (
-      <td
-        className={
-          data.text == new Date().toDateString() ? "background-red" : null
-        }
-        onClick={data.sortFunc}
-      >
-        {data.text}
-      </td>
-    )
-  }
-  // meta values comes to useState and xreate a sort when they are click
-  const [headerMeta, setHeaderMeta] = useState(meta)
-  const [tableData, setTableData] = useState([])
-  const [sortBy, setSortBy] = useState({ key: null, order: ">" })
-
-  useEffect(() => {
-    function sortFunc(m) {
-      setSortBy({ key: m.key, order: sortBy.order === ">" ? "<" : ">" })
-    }
-
-    setHeaderMeta(currentHeaderMeta =>
-      currentHeaderMeta.map(m =>
-        m.sort ? { ...m, sortFunc: () => sortFunc(m) } : m
-      )
-    )
-  }, [sortBy])
-
-  useEffect(() => {
-    // normalize data
-    setTableData(normalizeData(stock), meta)
-  }, [])
-
-  useEffect(() => {
-    // sort
-    setTableData(
-      normalizeData(
-        stock.sort((d1, d2) =>
-          compare[sortBy.order](d1[sortBy.key], d2[sortBy.key])
-        )
-      )
-    )
-  }, [sortBy])
-
   return (
     <>
       <h2>Stocks Table</h2>
-      <div>
-        <TableHeader headers={headerMeta} />
-        <TableData data={tableData} meta={meta} />
-      </div>
-      {/* <table style={{ width: `80%` }}>
+      <table style={{ width: `80%` }}>
         <tr>
-          <td>Item</td>
-          <td>Symbol</td>
-          <td>Price</td>
-          <td>Change %</td>
-          <td>Earning Day</td>
+          {/* <td>
+            {" "}
+            <button type="button" onClick={() => setSortedField("symbol")}>
+              Item
+            </button>
+          </td> */}
+          <td onClick={() => setSortedField("symbol")}>Symbol</td>
+          <td onClick={() => setSortedField("price")}>Price</td>
+          <td onClick={() => setSortedField("change")}>Change %</td>
+          <td onClick={() => setSortedField("earning")}>Earning Day</td>
         </tr>
-        {stock.map((data, index) => (
+        {sortedProducts.map((data, index) => (
           <tr key={index}>
-            <td>{index + 1}</td> <td> {data.symbol}</td> <td>{data.price}</td>
+            <td> {data.symbol}</td> <td>${data.price}</td>
             <td>{data.change}%</td>
             <td
               className={
@@ -191,7 +102,7 @@ const EarningsTable = () => {
             </td>
           </tr>
         ))}
-      </table> */}
+      </table>
     </>
   )
 }
