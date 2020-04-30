@@ -35,7 +35,7 @@ const meta = [
   },
 ]
 
-const pageSize = 5
+// const pageSize = 5
 
 function normalizeData(data) {
   return data.map(td => {
