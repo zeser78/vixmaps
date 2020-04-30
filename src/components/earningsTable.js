@@ -29,8 +29,12 @@ const EarningsTable = () => {
                 {
                   symbol: stock,
                   price: "null",
-                  change: null,
-                  earning: null,
+                  change: "null",
+                  earning: "null",
+                  priceAvg50: "null",
+                  priceAvg200: "null",
+                  volume: "null",
+                  avgVolume: "null",
                 },
               ]
               // console.log(data.symbol)
@@ -51,6 +55,10 @@ const EarningsTable = () => {
                 price: data.price,
                 change: data.changesPercentage,
                 earning: dateFormat,
+                priceAvg50: data.priceAvg50,
+                priceAvg200: data.priceAvg200,
+                volume: data.volume,
+                avgVolume: data.avgVolume,
               },
             ])
           }
@@ -76,21 +84,23 @@ const EarningsTable = () => {
       <h2>Stocks Table</h2>
       <table style={{ width: `80%` }}>
         <tr>
-          {/* <td>
-            {" "}
-            <button type="button" onClick={() => setSortedField("symbol")}>
-              Item
-            </button>
-          </td> */}
           <td onClick={() => setSortedField("symbol")}>Symbol</td>
           <td onClick={() => setSortedField("price")}>Price</td>
+          <td>Pice Avg50</td>
+          <td>Pice Avg200</td>
           <td onClick={() => setSortedField("change")}>Change %</td>
+          <td>Volumen</td>
+          <td>Volumen Avg</td>
           <td onClick={() => setSortedField("earning")}>Earning Day</td>
         </tr>
         {sortedProducts.map((data, index) => (
           <tr key={index}>
-            <td> {data.symbol}</td> <td>${data.price}</td>
+            <td> {data.symbol}</td> <td>${data.price}</td>{" "}
+            <td>{data.priceAvg50}</td>
+            <td>{data.priceAvg200}</td>
             <td>{data.change}%</td>
+            <td>{data.volume}</td>
+            <td>{data.avgVolume}</td>
             <td
               className={
                 data.earning == new Date().toDateString()

@@ -30,4 +30,7 @@ export let stockList = [
   "VIAC",
   "GM",
   "F",
+  "USO",
+  "MS",
+  "WORK",
 ]
